@@ -386,7 +386,9 @@ class StellarGraph:
             iterable: The neighbouring in-nodes.
         """
         if not self.is_directed():
-            return self.neighbors(node, include_edge_weight=include_edge_weight, edge_types=edge_types)
+            return self.neighbors(
+                node, include_edge_weight=include_edge_weight, edge_types=edge_types
+            )
 
         ilocs = self._edges.edge_ilocs(node, ins=True, outs=False)
         source = self._edges.sources[ilocs]
@@ -411,7 +413,9 @@ class StellarGraph:
             iterable: The neighbouring out-nodes.
         """
         if not self.is_directed():
-            return self.neighbors(node, include_edge_weight=include_edge_weight, edge_types=edge_types)
+            return self.neighbors(
+                node, include_edge_weight=include_edge_weight, edge_types=edge_types
+            )
 
         ilocs = self._edges.edge_ilocs(node, ins=False, outs=True)
         target = self._edges.targets[ilocs]
@@ -464,7 +468,9 @@ class StellarGraph:
             return types[0]
 
         # FIXME: we need to choose the type to return here properly
-        raise NotImplementedError("passing multiple node IDs to node_type is not supported")
+        raise NotImplementedError(
+            "passing multiple node IDs to node_type is not supported"
+        )
 
     @property
     def node_types(self):
@@ -755,7 +761,9 @@ class StellarGraph:
         if not self.is_directed():
             # in an undirected graph, the adjacency matrix should be symmetric: which means counting
             # weights from either "incoming" or "outgoing" edges, but not double-counting self loops
-            backward = sps.csr_matrix((weights, (tgt_idx, src_idx)), shape=(n, n), dtype="float32")
+            backward = sps.csr_matrix(
+                (weights, (tgt_idx, src_idx)), shape=(n, n), dtype="float32"
+            )
             backward.setdiag(0)
             adj += backward
 
